@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Marriage Outcomes Through Data: A Straight Talk Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #080C0D 0%, #0F1618 50%, #080C0D 100%);
+            color: #8FC7B8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0F1618 0%, #1F2628 100%);
+            border-bottom: 3px solid #4A696E;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(74, 105, 110, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #8FC7B8;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #4A696E;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #8FC7B8;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3A5C60;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #4A696E;
+            margin: 35px 0 20px 0;
+            font-weight: 600;
+        }
+
+        .section {
+            background: rgba(15, 22, 24, 0.6);
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-left: 4px solid #4A696E;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .section:hover {
+            border-left-color: #8FC7B8;
+            transition: border-left-color 0.3s ease;
+        }
+
+        p {
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #8FC7B8;
+        }
+
+        .casual-explain {
+            background: linear-gradient(135deg, #1F2628 0%, #0F1618 100%);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 6px;
+            border-left: 4px solid #4A4682;
+            font-style: italic;
+        }
+
+        .casual-explain p {
+            color: #8FC7B8;
+            font-size: 1.05em;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #4A4682 0%, #3A5C60 100%);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border-left: 5px solid #8FC7B8;
+            box-shadow: 0 4px 15px rgba(74, 70, 130, 0.4);
+        }
+
+        .insight-box p {
+            color: #8FC7B8;
+            font-weight: 500;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #0F1618 0%, #1F2628 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #3A5C60;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            border-color: #8FC7B8;
+            box-shadow: 0 8px 25px rgba(143, 199, 184, 0.2);
+        }
+
+        .concept-card h4 {
+            color: #8FC7B8;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .simple-math {
+            background: rgba(15, 22, 24, 0.8);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border: 1px solid #3A5C60;
+            font-family: 'Courier New', monospace;
+        }
+
+        .simple-math .formula {
+            text-align: center;
+            font-size: 1.1em;
+            margin: 15px 0;
+            color: #4A696E;
+            font-weight: 600;
+        }
+
+        .real-talk {
+            background: rgba(74, 70, 130, 0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border-left: 3px solid #4A4682;
+        }
+
+        .real-talk strong {
+            color: #8FC7B8;
+        }
+
+        .highlight {
+            color: #8FC7B8;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(74, 105, 110, 0.2) 0%, rgba(143, 199, 184, 0.2) 100%);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        ul.simple-list {
+            list-style: none;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul.simple-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #8FC7B8;
+        }
+
+        ul.simple-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4A696E;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            border-top: 2px solid #3A5C60;
+            color: #4A696E;
+            font-size: 0.95em;
+        }
+
+        code {
+            background: rgba(15, 22, 24, 0.8);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #8FC7B8;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>What Actually Predicts Divorce?</h1>
+        <p class="subtitle">A data-driven look at what makes marriages work or fall apart</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>The Big Picture</h2>
+            <p>We analyzed 5,000 couples to figure out what really matters when it comes to staying married versus getting divorced. Not the fairy tale stuff, not the advice column wisdom - just cold, hard patterns in the data.</p>
+            
+            <p>Think of this like medical research. Doctors don't say smoking causes lung cancer based on one person. They look at thousands of smokers and non-smokers and track who gets sick. Same idea here. We're looking for patterns across thousands of relationships to see what actually predicts outcomes.</p>
+
+            <div class="casual-explain">
+                <p>Here's the thing about prediction versus causation: Just because high conflict predicts divorce doesn't mean the conflict caused the divorce. Maybe both the conflict and the divorce were caused by something else entirely. We're looking for warning signs, not necessarily root causes.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>How Machine Learning Sees Relationships</h2>
+
+            <h3>Random Forest: The Committee Approach</h3>
+            <p>Imagine you're trying to predict if a couple will divorce, and you ask 100 different experts. Each expert makes a guess based on different aspects of the relationship. Some focus on money, others on communication, others on how long they've been married. Then you count up all the votes.</p>
+
+            <p>That's basically how Random Forest works. It creates hundreds of simple decision trees, each looking at the data slightly differently. Each tree votes on the outcome, and the majority wins.</p>
+
+            <div class="simple-math">
+                <p>Here's what one tree might look like:</p>
+                <div class="formula">If communication < 5 → likely divorce (confidence: 70%)</div>
+                <div class="formula">If communication ≥ 5 and conflict > 3 → maybe divorce (confidence: 45%)</div>
+                <div class="formula">If communication ≥ 5 and conflict ≤ 3 → likely stay married (confidence: 85%)</div>
+            </div>
+
+            <div class="real-talk">
+                <p><strong>The clever part:</strong> Each tree is slightly "dumb" on purpose - it only looks at a random subset of features and a random subset of couples. But when you combine hundreds of these dumb trees, you get something surprisingly smart. It's like the wisdom of crowds.</p>
+            </div>
+
+            <h3>Feature Importance: What Actually Matters</h3>
+            <p>Once the random forest is trained, we can ask it: "Which variables helped you make decisions the most?" The answer might surprise you.</p>
+
+            <p>Communication quality consistently ranks at the top. Not income, not number of kids, not how old you were when you got married. How well you talk to each other is the biggest predictor.</p>
+
+            <div class="casual-explain">
+                <p>Think about it this way: When the model has to split couples into "likely to divorce" versus "likely to stay together," communication score gives it the cleanest separation. It's like sorting mail - communication is the equivalent of ZIP codes. Makes the sorting really efficient.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>ROC Curves: How Good Is Good Enough?</h2>
+
+            <p>Say you build a model that predicts divorce. How do you know if it's any good? You could just count how many predictions it gets right, but that's too simple. Here's why:</p>
+
+            <p>Imagine a model that predicts "everyone stays married." In our dataset where most couples actually do stay married, this lazy model would be right like 70% of the time. But it's useless because it never catches the divorces.</p>
+
+            <h3>The Trade-off</h3>
+            <p>Every prediction model has to balance two things:</p>
+
+            <ul class="simple-list">
+                <li><span class="highlight">True Positive Rate</span> (Sensitivity): When a couple actually gets divorced, how often does the model catch it?</li>
+                <li><span class="highlight">False Positive Rate</span>: When a couple stays married, how often does the model wrongly predict divorce?</li>
+            </ul>
+
+            <p>You can't max out both. If you want to catch every single divorce, you'll have to flag a bunch of stable marriages as "at risk." If you want to never falsely alarm stable couples, you'll miss some actual divorces.</p>
+
+            <div class="simple-math">
+                <p>The ROC curve plots this trade-off:</p>
+                <div class="formula">X-axis: False alarms (predicting divorce when couple stays married)</div>
+                <div class="formula">Y-axis: True catches (correctly predicting actual divorces)</div>
+                <p style="margin-top: 15px;">A perfect model would have 100% true catches with 0% false alarms. That's the top-left corner. A random guess would follow the diagonal line.</p>
+            </div>
+
+            <div class="insight-box">
+                <p><strong>What the AUC number means:</strong> Area Under the Curve (AUC) of 0.85 means if you randomly pick one divorced couple and one married couple, there's an 85% chance the model will correctly rank the divorced couple as higher risk. It's basically a report card - 0.5 is failing (random guessing), 1.0 is perfect.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Survival Analysis: When Do Marriages End?</h2>
+
+            <p>Borrowed from medical research (where it's used to track disease progression), survival analysis looks at <em>when</em> things happen, not just <em>if</em> they happen.</p>
+
+            <h3>The Survival Curve</h3>
+            <p>Start with 100 couples on their wedding day. Track them over the years. How many make it to year 5? Year 10? Year 20? Plot those percentages and you get a survival curve.</p>
+
+            <div class="casual-explain">
+                <p>The curve usually drops fastest in the first few years (the "honeymoon is over" effect), then flattens out in the middle years when people get comfortable, then sometimes drops again around the "seven year itch" or when kids leave home. These aren't myths - they show up in the data.</p>
+            </div>
+
+            <h3>Hazard Function: The Danger Zones</h3>
+            <p>Instead of asking "what percentage survives?", the hazard function asks "for couples who've made it this far, what's the risk of divorce in the next year?"</p>
+
+            <p>It's like asking: "You've survived the first 5 years - congrats. But what are the odds you'll divorce in year 6 specifically?"</p>
+
+            <div class="simple-math">
+                <div class="formula">Hazard Rate = (Divorces in this period) / (Couples at risk at start of period)</div>
+                <p style="margin-top: 15px;">High hazard rates show you the danger zones - the periods where divorce risk spikes.</p>
+            </div>
+
+            <div class="real-talk">
+                <p><strong>Why this matters:</strong> If you see hazard rates spike around year 7, that's actionable. Marriage counselors could focus resources on couples approaching that milestone. It's like how doctors schedule cancer screenings at certain ages based on when risk increases.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Interaction Effects: When Two Plus Two Equals Five</h2>
+
+            <p>Most analysis looks at variables one at a time. "Does income predict divorce?" "Does age at marriage predict divorce?" But the real world doesn't work that way. Variables interact.</p>
+
+            <h3>What Interaction Means</h3>
+            <p>Say you find that having kids increases divorce risk. But wait - for high-income couples, kids actually seem to stabilize the marriage. For low-income couples, kids increase the strain. The effect of children depends on income level. That's an interaction.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Age × Duration</h4>
+                    <p>People who married young have higher divorce rates in the early years, but if they make it past year 10, they're actually more stable than couples who married older. The effect of age depends on how long you've been married.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Communication × Conflict</h4>
+                    <p>High conflict is bad, obviously. But if you have good communication, you can handle conflict better. The damage from conflict is much worse when communication is also poor. They multiply each other.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Income × Children</h4>
+                    <p>For wealthy couples, having kids barely changes divorce risk. For lower-income couples, each additional child significantly increases the strain. Money doesn't buy happiness, but it does buy resources to handle stress.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Culture × Religion</h4>
+                    <p>Cultural mismatch is risky. Religious mismatch is risky. But having both mismatches isn't just double the risk - it's more like triple. They compound each other.</p>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <p><strong>The math of interaction:</strong> If variable A adds +2 to divorce risk and variable B adds +3, but together they add +8, that extra +3 is the interaction effect. It's the "synergy" or compounding that happens when factors combine.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Clustering: Finding Relationship Archetypes</h2>
+
+            <p>Instead of treating every couple as unique, what if we could group them into types? Like personality types, but for relationships.</p>
+
+            <h3>K-Means: Finding the Centers</h3>
+            <p>The algorithm is surprisingly simple. You tell it "find me 5 groups" and it:</p>
+
+            <ul class="simple-list">
+                <li>Randomly picks 5 couples as initial "centers"</li>
+                <li>Assigns every other couple to whichever center they're closest to (based on communication, conflict, income, etc.)</li>
+                <li>Moves each center to the average position of its group</li>
+                <li>Repeats until things stop moving around</li>
+            </ul>
+
+            <div class="casual-explain">
+                <p>Think of it like organizing people at a party into conversation circles. People naturally drift toward groups they have something in common with. The center of each circle is what the group has in common - their defining characteristics.</p>
+            </div>
+
+            <h3>The Five Archetypes We Found</h3>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Harmonious</h4>
+                    <p>High communication, low conflict, generally stable. These are the couples in marriage counseling success stories. About 10% divorce rate.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Distressed</h4>
+                    <p>Low communication, high conflict, struggling. These couples are obviously at risk. About 70% divorce rate. Most of them know they're in trouble.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Passionate</h4>
+                    <p>High communication AND high conflict. They fight a lot but also talk through things. Volatile but not necessarily doomed. About 35% divorce rate.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Disconnected</h4>
+                    <p>Low communication, low conflict - but not because they're happy. They've just... checked out. Quiet divorce risk. About 45% divorce rate.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Moderate</h4>
+                    <p>Everything's kind of average. Not great, not terrible. They're in the middle of the bell curve. About 30% divorce rate.</p>
+                </div>
+            </div>
+
+            <div class="real-talk">
+                <p><strong>Why archetypes matter:</strong> Different profiles need different interventions. The Distressed couples need immediate help. The Disconnected couples need to rediscover each other. The Passionate couples might just need conflict resolution skills. One-size-fits-all advice doesn't work.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Correlation vs. Causation: The Eternal Warning</h2>
+
+            <p>Everything we've talked about finds correlations - patterns where things happen together. But correlation isn't causation. This isn't just a pedantic academic point. It matters for real-world decisions.</p>
+
+            <h3>The Ice Cream Example</h3>
+            <p>Ice cream sales correlate with drowning deaths. Both peak in summer. Does ice cream cause drowning? Of course not. Hot weather causes both more ice cream buying and more swimming (hence more drowning).</p>
+
+            <p>Same thing happens in our divorce data. We might find that couples who vacation together have lower divorce rates. Does this mean vacations prevent divorce? Or do couples who are already happy take more vacations together? Or does financial stability (which allows vacations) reduce divorce risk, and the vacation is just a side effect?</p>
+
+            <div class="insight-box">
+                <p><strong>What we can say:</strong> These variables are useful for prediction. If you want to assess divorce risk, looking at communication patterns will help. But if you want to save a marriage, improving communication might help... or it might not if the poor communication is itself a symptom of deeper issues.</p>
+            </div>
+
+            <h3>Natural Experiments</h3>
+            <p>The gold standard for proving causation is a randomized experiment. But you can't randomly assign people to get divorced. So we look for "natural experiments" - situations where something changes for one group but not another.</p>
+
+            <p>For example, if one state changes its marriage counseling laws and a neighboring state doesn't, you can compare divorce rates before and after. The states are similar enough that differences are likely due to the policy change.</p>
+        </div>
+
+        <div class="section">
+            <h2>Confusion Matrix: Where the Model Screws Up</h2>
+
+            <p>A confusion matrix shows you the four possible outcomes of any prediction:</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>True Positive</h4>
+                    <p>Model predicts divorce, couple divorces. Correct prediction of a bad outcome.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>True Negative</h4>
+                    <p>Model predicts staying married, couple stays married. Correct prediction of a good outcome.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>False Positive</h4>
+                    <p>Model predicts divorce, couple stays married. False alarm. Might scare couples unnecessarily.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>False Negative</h4>
+                    <p>Model predicts staying married, couple divorces. Missed warning sign. Couple doesn't get help when they need it.</p>
+                </div>
+            </div>
+
+            <div class="casual-explain">
+                <p>Which type of error is worse depends on your goals. If you're running a marriage counseling service, false negatives are terrible - you're missing couples who need help. If you're writing insurance policies, false positives are expensive - you're overestimating risk and losing customers to competitors.</p>
+            </div>
+
+            <h3>Precision vs. Recall</h3>
+            <p>Two ways to measure performance:</p>
+
+            <div class="simple-math">
+                <div class="formula">Precision = True Positives / (True Positives + False Positives)</div>
+                <p style="margin-top: 10px; font-size: 0.95em;">Of all the couples we predicted would divorce, what percentage actually did?</p>
+                
+                <div class="formula" style="margin-top: 20px;">Recall = True Positives / (True Positives + False Negatives)</div>
+                <p style="margin-top: 10px; font-size: 0.95em;">Of all the couples who actually divorced, what percentage did we catch?</p>
+            </div>
+
+            <p>High precision means your predictions are trustworthy - when you say "this couple is at risk," you're probably right. High recall means you're catching most of the at-risk couples, even if you have some false alarms.</p>
+        </div>
+
+        <div class="section">
+            <h2>Risk Factors: What Actually Increases Divorce Odds</h2>
+
+            <p>We found several strong risk factors. Here's what stood out:</p>
+
+            <h3>Communication Breaks Everything</h3>
+            <p>Couples with communication scores below 5 (on a 1-10 scale) have roughly 3x the divorce rate of couples scoring above 7. This is the single strongest predictor in the entire dataset.</p>
+
+            <div class="real-talk">
+                <p><strong>Why it matters:</strong> Communication isn't just about talking. It's about feeling heard, being able to resolve conflicts, sharing feelings without fear, negotiating compromises. When that breaks down, everything else gets harder.</p>
+            </div>
+
+            <h3>The Conflict Sweet Spot</h3>
+            <p>Surprisingly, zero conflict isn't optimal. The sweet spot is about 1-2 conflicts per month. Less than that might mean avoidance (the Disconnected archetype). More than 3-4 per month and you're in dangerous territory.</p>
+
+            <div class="casual-explain">
+                <p>Some conflict is healthy - it means you're engaged and working through issues. The question is whether you can resolve conflicts constructively. High-conflict couples with good communication fare better than low-conflict couples who avoid dealing with problems.</p>
+            </div>
+
+            <h3>Money Matters, But Not How You Think</h3>
+            <p>Raw income doesn't predict divorce much. But financial stress does. The difference is whether your income meets your needs. A couple making $50K with no debt and modest lifestyle might be more stable than a couple making $120K with huge mortgage and lifestyle inflation.</p>
+
+            <h3>The Seven Year Phenomenon Is Real</h3>
+            <p>Divorce risk does spike around years 7-10 of marriage. It's not just a cultural myth. Something about that timeline - maybe when daily routines become monotonous, maybe when initial attraction fades, maybe when reality fully sets in - increases the hazard rate.</p>
+
+            <h3>Kids Are Complicated</h3>
+            <p>Children don't clearly increase or decrease divorce risk overall. The effect depends on:</p>
+
+            <ul class="simple-list">
+                <li>Financial resources (kids strain poor couples more)</li>
+                <li>Relationship quality before kids (strong couples handle the stress better)</li>
+                <li>Number of kids (3+ seems to be a tipping point for increased stress)</li>
+                <li>Ages of kids (divorce risk drops when kids are young, increases when they're teens)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>What Machine Learning Can't Tell You</h2>
+
+            <p>For all the sophisticated analysis, there are limits to what we can learn from data about something as human as marriage.</p>
+
+            <h3>The Unmeasurable Factors</h3>
+            <p>We don't have data on love, chemistry, shared values, sense of humor, intellectual compatibility, physical attraction, or a thousand other things that matter in relationships. We're working with proxies and measurable behaviors.</p>
+
+            <h3>The Unique Couple Problem</h3>
+            <p>These models tell you what happens on average. But your specific relationship isn't average. You might have high conflict but strong bonds. You might have low communication but deep understanding. Statistics describe groups, not individuals.</p>
+
+            <div class="insight-box">
+                <p><strong>The real value:</strong> This analysis identifies warning signs and risk factors. It can't tell you whether your specific marriage will fail. But it can tell you: "Couples with these characteristics have elevated risk. Maybe worth paying attention to." It's a smoke detector, not a crystal ball.</p>
+            </div>
+
+            <h3>Context Matters</h3>
+            <p>Cultural context, personal history, mental health, external stressors - all matter but are hard to capture in a dataset. Two couples might look identical on paper but have completely different outcomes because of factors we can't measure.</p>
+        </div>
+
+        <div class="section">
+            <h2>Practical Takeaways</h2>
+
+            <p>If you're going to remember anything from this analysis:</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Communication Is King</h4>
+                    <p>Work on this above everything else. Learn to express needs, listen actively, resolve conflicts constructively. It's the strongest predictor we have.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Some Conflict Is Healthy</h4>
+                    <p>Don't aim for zero conflict. Aim for constructive conflict resolution. The goal isn't to never disagree, it's to disagree productively.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Know Your Archetype</h4>
+                    <p>Are you Harmonious, Distressed, Passionate, Disconnected, or Moderate? Different patterns need different solutions. Self-awareness is half the battle.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Watch the Danger Zones</h4>
+                    <p>Years 1-3, 7-10, and empty nest periods show elevated risk. During these times, invest extra effort in maintaining connection.</p>
+                </div>
+            </div>
+
+            <div class="real-talk">
+                <p><strong>Final thought:</strong> Data can identify patterns and risks, but every relationship is ultimately a choice. These patterns show what typically happens, not what must happen. Awareness of risks is the first step to defying them.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Analysis based on 5,000 couples across 21 predictive variables</p>
+        <p>Techniques: Random Forest Classification, Survival Analysis, K-Means Clustering, Interaction Effect Modeling</p>
+        <p>Remember: Statistics describe populations, not destinies</p>
+    </footer>
+</body>
+</html>
